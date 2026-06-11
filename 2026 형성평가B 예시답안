@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>형성평가 B 모범답안 · 붉은 구리, 검은 증거 사건</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1b2030;
+    --ink-soft:#3c4459;
+    --paper:#f4efe3;
+    --paper-2:#efe7d6;
+    --edge:#dccfb2;
+    --ochre:#a9803f;
+    --ochre-soft:#c6a368;
+    --answer:#c41e1e;
+    --answer-deep:#9c1414;
+    --answer-bg:rgba(196,30,30,.055);
+    --muted:#7c7259;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"IBM Plex Sans KR",sans-serif;
+    color:var(--ink);
+    background:#15171d;
+    background-image:radial-gradient(circle at 22% 8%, #21252f, #15171d 62%);
+    line-height:1.8;
+    padding:46px 16px 90px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ── floating print button ── */
+  .toolbar{position:fixed;top:18px;right:18px;z-index:50;}
+  .toolbar button{
+    font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.08em;
+    color:#f4efe3;background:#c41e1e;border:none;border-radius:2px;
+    padding:9px 14px;cursor:pointer;box-shadow:0 6px 18px -6px rgba(0,0,0,.6);
+    transition:transform .15s ease, background .15s ease;
+  }
+  .toolbar button:hover{background:#9c1414;transform:translateY(-1px);}
+
+  /* ── dossier sheet ── */
+  .dossier{
+    max-width:880px;margin:0 auto;background:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, transparent 0 31px, rgba(27,32,48,.03) 31px 32px),
+      radial-gradient(circle at -10% -10%, rgba(169,128,63,.07), transparent 55%);
+    border:1px solid var(--edge);border-radius:3px;
+    box-shadow:0 34px 70px -22px rgba(0,0,0,.65), 0 0 0 7px rgba(255,255,255,.018);
+    padding:0 0 56px;position:relative;overflow:hidden;
+  }
+  .dossier::before{content:"";position:absolute;top:0;left:0;width:7px;height:100%;
+    background:linear-gradient(var(--ochre),var(--ochre-soft));}
+
+  /* ── header ── */
+  header{padding:42px 52px 26px;position:relative;border-bottom:2px solid var(--ink);}
+  .kicker{font-family:"Space Mono",monospace;font-size:12px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ochre);margin:0 0 6px;}
+  .eyebrow{font-size:14px;font-weight:600;color:var(--ink-soft);letter-spacing:.02em;margin:0 0 10px;}
+  h1{font-family:"Black Han Sans",sans-serif;font-weight:400;
+    font-size:clamp(34px,6vw,56px);line-height:1.02;margin:0;color:var(--ink);
+    letter-spacing:-.01em;}
+  h1 .accent{color:var(--answer);}
+  .casebar{font-family:"Space Mono",monospace;font-size:11.5px;letter-spacing:.12em;
+    color:var(--muted);margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;}
+  .casebar b{color:var(--ink);}
+
+  .stamp{
+    position:absolute;top:34px;right:42px;transform:rotate(-8deg);
+    border:2.5px solid var(--answer);color:var(--answer);border-radius:4px;
+    padding:7px 13px 5px;text-align:center;opacity:.86;
+    box-shadow:inset 0 0 0 1px rgba(196,30,30,.25);
+  }
+  .stamp .big{font-family:"Space Mono",monospace;font-weight:700;font-size:18px;
+    letter-spacing:.18em;line-height:1;}
+  .stamp .small{font-size:11px;font-weight:600;letter-spacing:.14em;margin-top:4px;}
+
+  /* ── legend ── */
+  .legend{display:flex;align-items:center;gap:10px;margin:0;padding:13px 52px;
+    background:var(--answer-bg);border-bottom:1px dashed var(--edge);
+    font-size:13.5px;color:var(--answer-deep);font-weight:500;}
+  .swatch{display:inline-block;width:34px;height:14px;border-radius:2px;
+    background:var(--answer);}
+
+  /* ── body sections ── */
+  section{padding:30px 52px 4px;}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 0 14px;}
+  .sec-head h2{font-size:21px;font-weight:700;margin:0;color:var(--ink);letter-spacing:-.01em;}
+  .sec-head .num{font-family:"Space Mono",monospace;font-size:12px;color:var(--ochre);
+    letter-spacing:.1em;}
+
+  p{margin:0 0 14px;color:var(--ink-soft);}
+  .briefing p{font-size:15.5px;}
+  strong{color:var(--ink);font-weight:600;}
+  em{color:var(--ink-soft);font-style:italic;}
+  code{font-family:"Space Mono",monospace;font-size:.92em;background:#fff;
+    border:1px solid var(--edge);border-radius:3px;padding:1px 6px;color:var(--ink);}
+
+  .mission{margin:8px 52px 6px;padding:16px 20px;background:var(--ink);
+    color:#f4efe3;border-radius:3px;position:relative;}
+  .mission .t{font-family:"Space Mono",monospace;font-size:11px;letter-spacing:.18em;
+    color:var(--ochre-soft);text-transform:uppercase;}
+  .mission p{color:#f0ead9;margin:6px 0 0;font-size:15px;}
+  .mission strong{color:#fff;}
+
+  .divider{height:0;border:none;border-top:1px solid var(--edge);margin:26px 52px 0;}
+
+  /* ── steps ── */
+  .step{padding:26px 52px 6px;}
+  .step-head{display:flex;align-items:center;gap:14px;margin:0 0 12px;}
+  .badge{flex:none;width:42px;height:42px;border-radius:50%;background:var(--ink);
+    color:#f4efe3;display:flex;align-items:center;justify-content:center;
+    font-family:"Black Han Sans",sans-serif;font-size:20px;}
+  .step-head .meta .name{font-size:18px;font-weight:700;color:var(--ink);}
+  .step-head .meta .crit{font-family:"Space Mono",monospace;font-size:11px;
+    letter-spacing:.08em;color:var(--ochre);text-transform:uppercase;margin-top:2px;}
+  .prompt{font-size:15px;color:var(--ink-soft);margin:0 0 8px;}
+  .tip{font-size:13px;color:var(--muted);background:var(--paper-2);
+    border-left:3px solid var(--ochre-soft);padding:8px 12px;border-radius:0 3px 3px 0;
+    margin:0 0 14px;}
+  .tip b{color:var(--ochre);}
+
+  .field-label{font-size:13.5px;font-weight:600;color:var(--ink);margin:14px 0 6px;}
+
+  /* ── answer block ── */
+  .answer{position:relative;background:var(--answer-bg);
+    border-left:3px solid var(--answer);border-radius:0 4px 4px 0;
+    padding:12px 16px 12px;margin:0 0 6px;}
+  .atag{display:inline-block;font-family:"Space Mono",monospace;font-size:10px;
+    font-weight:700;letter-spacing:.14em;color:#fff;background:var(--answer);
+    padding:2px 8px;border-radius:2px;margin-bottom:7px;text-transform:uppercase;}
+  .answer .txt{color:var(--answer-deep);font-weight:500;font-size:15px;line-height:1.75;}
+  .answer .txt code{color:var(--answer-deep);border-color:rgba(196,30,30,.3);background:#fff;}
+  .answer ol{margin:4px 0 0;padding-left:20px;}
+  .answer ol li{color:var(--answer-deep);font-weight:500;margin-bottom:7px;line-height:1.7;}
+  .answer ol li b{color:var(--answer);}
+
+  /* ── tables ── */
+  table{width:100%;border-collapse:collapse;margin:6px 0 8px;font-size:14.5px;}
+  .vtable td{border:1px solid var(--edge);padding:11px 13px;vertical-align:top;}
+  .vtable td.k{width:34%;background:var(--paper-2);font-weight:600;color:var(--ink);}
+  .vtable td.k small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px;}
+  .vtable td.v{color:var(--answer-deep);font-weight:500;}
+
+  .rtable{margin-top:8px;}
+  .rtable th{background:var(--ink);color:#f4efe3;text-align:left;padding:10px 13px;
+    font-size:13px;font-weight:600;letter-spacing:.02em;}
+  .rtable td{border:1px solid var(--edge);padding:11px 13px;color:var(--ink-soft);font-size:14px;}
+  .rtable td.e{width:24%;font-weight:700;color:var(--ink);background:var(--paper-2);}
+
+  /* ── checklist ── */
+  .check li{list-style:none;position:relative;padding:9px 0 9px 34px;
+    border-bottom:1px dashed var(--edge);color:var(--ink-soft);font-size:14px;}
+  .check{padding:0;margin:6px 0 0;}
+  .check li::before{content:"✔";position:absolute;left:4px;top:8px;color:var(--answer);
+    font-weight:700;font-size:16px;}
+  .check li b{color:var(--ink);}
+  .check .ok{font-family:"Space Mono",monospace;font-size:11px;color:var(--answer);
+    letter-spacing:.1em;font-weight:700;}
+
+  /* ── footer ── */
+  .foot{margin:30px 52px 0;padding:16px 20px;background:var(--paper-2);
+    border:1px dashed var(--edge);border-radius:3px;font-size:13.5px;color:var(--muted);}
+  .foot b{color:var(--ochre);}
+
+  /* ── responsive ── */
+  @media (max-width:640px){
+    body{padding:24px 8px 60px;}
+    header,.legend,section,.step,.mission,.divider,.foot{padding-left:24px;padding-right:24px;}
+    .mission,.foot{margin-left:18px;margin-right:18px;}
+    .divider{margin-left:24px;margin-right:24px;}
+    .stamp{top:auto;right:24px;bottom:-6px;transform:rotate(-8deg) scale(.85);}
+    h1{font-size:32px;}
+  }
+
+  /* ── print ── */
+  @media print{
+    body{background:#fff;padding:0;}
+    .toolbar{display:none;}
+    .dossier{box-shadow:none;border:none;max-width:none;}
+    .answer,.tip,.mission,.legend{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    section,.step{page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="toolbar"><button onclick="window.print()">인쇄 · PDF 저장</button></div>
+
+  <div class="dossier">
+
+    <header>
+      <p class="kicker">Case File · 01 — Classified</p>
+      <p class="eyebrow">🔍 세홍과학호 CSI · 형성평가 B (연습)</p>
+      <h1>붉은 구리, <span class="accent">검은 증거</span> 사건</h1>
+      <div class="casebar">
+        <span>유형 <b>탐구·설계 (Criterion B)</b></span>
+        <span>반응 <b>2Cu + O₂ → 2CuO</b></span>
+        <span>상태 <b>훈련 / 점수 미반영</b></span>
+      </div>
+      <div class="stamp">
+        <div class="big">ANSWER KEY</div>
+        <div class="small">모범답안 · 교사용</div>
+      </div>
+    </header>
+
+    <p class="legend"><span class="swatch"></span> 붉은색 글씨 = <strong style="color:var(--answer-deep)">예시(모범) 답안</strong> — 학생 작성칸에 들어갈 모범 서술입니다.</p>
+
+    <section class="briefing">
+      <div class="sec-head"><span class="num">FILE</span><h2>📡 사건 브리핑</h2></div>
+      <p>세홍과학호 점검 중, 본래 <strong>붉은빛</strong>이던 구리(Cu) 부품이 과열되어 표면이 <strong>검게</strong> 변한 채 발견됐다. 그런데 정밀 저울로 다시 재 보니 가열 전보다 <strong>질량이 오히려 늘어나</strong> 있었다.</p>
+      <p>용의자는 우긴다. <em>"구리를 그냥 가열했는데 더 무거워졌다고? 누가 몰래 가루를 묻혀 무게를 부풀린 조작이다!"</em></p>
+      <p>하지만 핵심 단서는 <strong>질량 보존 법칙</strong>이다. 금속 연소는 기체를 내보내는 것이 아니라 <strong>공기 중 산소를 빨아들이는</strong> 반응(<code>2Cu + O₂ → 2CuO</code>)이다. 그래서 산소가 자유롭게 드나드는 <strong>열린 용기</strong>에서는 질량이 늘고, 외부를 차단한 <strong>닫힌(밀폐) 용기</strong>에서는 전체 질량이 그대로다. 두 경우를 비교하면 늘어난 질량의 출처가 '몰래 묻힌 가루'가 아니라 <strong>공기 중 산소</strong>임을 증명할 수 있다.</p>
+    </section>
+
+    <div class="mission">
+      <span class="t">Mission</span>
+      <p>구리를 가열할 때 <strong>열린 용기 vs 닫힌(밀폐) 용기</strong>의 질량 변화를 비교하는 실험을 설계해, 용의자의 '조작' 주장을 무너뜨려라.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-head">
+        <div class="badge">1</div>
+        <div class="meta"><div class="name">문제 인식</div><div class="crit">채점 요소 · 문제 인식</div></div>
+      </div>
+      <p class="prompt">실험으로 <strong>검증할 핵심 질문</strong>을 한 문장의 탐구 질문으로 명확히 적어라.</p>
+      <div class="tip"><b>팁</b> — "무엇을(조작) 바꾸면, 무엇이(종속) 어떻게 달라질까?" 형태로.</div>
+      <div class="field-label">나의 탐구 질문</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">구리를 가열할 때, <strong>용기의 밀폐 여부(열린 용기 vs 닫힌 용기)</strong>에 따라 반응 전후의 <strong>질량 변화</strong>는 어떻게 달라질까?</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="step">
+      <div class="step-head">
+        <div class="badge">2</div>
+        <div class="meta"><div class="name">가설 설정</div><div class="crit">채점 요소 · 가설 설정</div></div>
+      </div>
+      <p class="prompt">예상 답(가설)을 쓰고, <strong>왜 그렇게 예상하는지 과학적 근거</strong>까지 설명하라.</p>
+      <div class="tip"><b>팁</b> — "만약 ~라면, ~할 것이다. 왜냐하면 ~이기 때문이다." 근거에 <b>질량 보존 법칙</b> + <b>산소와의 결합</b>을 엮을 것.</div>
+
+      <div class="field-label">가설</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">구리를 <strong>열린 용기</strong>에서 가열하면 공기 중 산소와 결합하여 시료의 질량이 <strong>증가</strong>하고, <strong>닫힌(밀폐) 용기</strong>에서 가열하면 물질이 드나들지 못하므로 용기 전체의 질량은 <strong>변하지 않을</strong> 것이다.</div>
+      </div>
+
+      <div class="field-label">그렇게 예상한 과학적 근거</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">화학 반응이 일어나도 원자는 새로 생기거나 없어지지 않으므로(<strong>질량 보존 법칙</strong>), 반응에 참여한 모든 물질을 합한 총질량은 일정하다. 구리의 연소(<code>2Cu + O₂ → 2CuO</code>)는 공기 중 <strong>산소를 흡수</strong>하는 반응이다. 따라서 산소가 계속 공급되는 열린 용기에서는 시료가 산소를 받아들여 질량이 늘고, 외부와 차단된 닫힌 용기에서는 산소가 추가로 들어올 수 없어 전체 질량이 보존된다.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="step">
+      <div class="step-head">
+        <div class="badge">3</div>
+        <div class="meta"><div class="name">변인 설정</div><div class="crit">채점 요소 · 변인 통제</div></div>
+      </div>
+      <p class="prompt">세 가지 변인을 정하라. 특히 <strong>조작 변인은 '어떻게 바꿀지'</strong>, <strong>데이터는 '얼마나·어떻게 모을지'</strong>까지.</p>
+
+      <table class="vtable">
+        <tr>
+          <td class="k">조작 변인<small>내가 바꾸는 것</small></td>
+          <td class="v">용기의 <strong>밀폐 여부</strong> — 열린 용기 / 닫힌(밀폐) 용기</td>
+        </tr>
+        <tr>
+          <td class="k">종속 변인<small>관찰·측정하는 것</small></td>
+          <td class="v">가열 전후의 <strong>질량 변화</strong> (열린 용기는 시료의 질량, 닫힌 용기는 용기 전체의 질량)</td>
+        </tr>
+        <tr>
+          <td class="k">통제 변인<small>똑같이 유지하는 것</small></td>
+          <td class="v">구리 가루의 종류와 <strong>양(질량)</strong>, 구리 <strong>입자 크기</strong>, <strong>가열 온도·시간</strong>, 사용하는 전자저울, 용기(도가니)의 종류</td>
+        </tr>
+      </table>
+      <div class="tip"><b>주의</b> — "같은 저울 사용" 같은 당연한 말 말고, <b>화학적으로 의미 있는 조건</b>(가루의 양·입자 크기·가열 온도/시간)을 써야 만점.</div>
+
+      <div class="field-label">충분한 데이터를 모으기 위한 방법</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">같은 조건에서 실험을 <strong>3회 반복</strong>하여 가열 전과 가열 후의 <strong>최종 질량 변화</strong>만을 측정하여 확인한다.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="step">
+      <div class="step-head">
+        <div class="badge">4</div>
+        <div class="meta"><div class="name">탐구 설계</div><div class="crit">채점 요소 · 탐구 설계</div></div>
+      </div>
+      <p class="prompt"><strong>다른 사람이 그대로 따라 할 수 있을 만큼</strong> 빠짐없이 설계하라.</p>
+      <div class="tip"><b>팁 1</b> — 닫힌 용기는 <b>외부 산소가 더 못 들어오게 막는 장치</b>를 분명히. <b>팁 2</b> — 닫힌 용기는 '용기 전체', 열린 용기는 '시료'의 질량을 재면 결과가 또렷.</div>
+
+      <div class="field-label">① 준비물 (재료·장비)</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">구리 가루, <strong>도가니와 뚜껑</strong>(열린 용기용)·<strong>밀폐 가능한 시험관과 고무마개 또는 밀폐 플라스크</strong>(닫힌 용기용), 알코올램프, 삼발이, 도가니 집게, 전자저울, 약숟가락, 보안경, 내열 장갑, 실험복</div>
+      </div>
+
+      <div class="field-label">② 안전 유의사항</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <div class="txt">고온으로 가열하므로 뜨거운 용기는 반드시 <strong>집게</strong>로 잡고, <strong>보안경·장갑·실험복</strong>을 착용한다. 가열 중 얼굴을 가까이 대지 않으며, 질량을 잴 때는 반드시 <strong>충분히 식힌 뒤</strong> 측정한다. 밀폐 용기는 내부 압력이 높아져 깨지거나 마개가 튈 수 있으므로 <strong>약한 불로 서서히</strong> 가열하고 과열하지 않는다.</div>
+      </div>
+
+      <div class="field-label">③ 실험 과정 (단계별)</div>
+      <div class="answer">
+        <span class="atag">예시 답안</span>
+        <ol>
+          <li>전자저울로 <b>빈 도가니</b>(열린 용기)와 <b>빈 밀폐 용기</b>의 질량을 각각 측정한다.</li>
+          <li>두 용기에 <b>같은 양(질량)</b>의 구리 가루를 넣는다. 열린 용기는 (도가니+구리)의 질량을, 닫힌 용기는 마개로 완전히 밀폐한 뒤 (용기 전체)의 질량을 '반응 전' 값으로 기록한다.</li>
+          <li>두 용기를 <b>같은 세기</b>로 가열하여 구리를 충분히 반응시킨다. (붉은색 → 검은색 산화 구리(Ⅱ))</li>
+          <li>색 변화가 멈추면 가열을 끝내고, <b>충분히 식힌 뒤</b> 같은 저울로 '반응 후' <b>최종 질량</b>을 다시 측정한다. (열린 용기=도가니+시료, 닫힌 용기=용기 전체)</li>
+          <li>②~④ 과정을 <b>3회 반복</b>하여 측정한 반응 전후의 <b>최종 질량 변화량</b>을 표에 기록하고, 열린 용기와 닫힌 용기의 결과를 비교한다.</li>
+        </ol>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <section>
+      <div class="sec-head"><span class="num">CHECK</span><h2>✅ 채점 포인트 점검 <span class="ok" style="font-size:12px">— 위 예시 답안은 모두 충족</span></h2></div>
+      <ul class="check">
+        <li><b>[문제 인식]</b> 탐구 질문에 밀폐 여부(독립변인)와 질량 변화(종속변인)가 명확히 드러나는가?</li>
+        <li><b>[가설 설정]</b> 예상 결과만이 아니라 '왜 그런지' 과학적 추론·근거가 포함됐는가?</li>
+        <li><b>[변인 통제]</b> 통제 변인에 화학적으로 의미 있는 조건이 있고, 데이터 수집 방법이 논리적인가?</li>
+        <li><b>[탐구 설계]</b> 외부 산소 차단 장치가 있고, 제3자가 재현할 만큼 상세하고 안전한가?</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="num">RUBRIC</span><h2>📋 Criterion B 「탐구 및 설계하기」 채점 기준</h2></div>
+      <table class="rtable">
+        <tr><th style="width:24%">평가 요소</th><th>이렇게 하면 만점!</th></tr>
+        <tr><td class="e">문제 인식</td><td>무엇을 검증할지(탐구 질문)를 분명히 밝히고 서술했는가?</td></tr>
+        <tr><td class="e">가설 설정</td><td><strong>과학적 추론</strong>으로 <em>왜 그렇게 예상하는지</em>까지 설명한 <strong>검증 가능한 가설</strong>인가?</td></tr>
+        <tr><td class="e">변인 통제</td><td>변인을 나열만 하지 않고, <strong>어떻게 조작할지 + 충분한 데이터를 어떻게 모을지</strong>를 구체적으로 썼는가?</td></tr>
+        <tr><td class="e">탐구 설계</td><td>알맞은 <strong>재료·장비</strong>로 <strong>논리적이고 빠짐없고 안전한</strong> 방법을 설계했는가?</td></tr>
+      </table>
+    </section>
+
+    <div class="foot">
+      <b>전이(Transfer) 포인트</b> — 여기서 익힌 '열린 계 vs 닫힌 계' 설계 능력을 곧이어 <b>총괄평가 B 「철 연소」</b>(4Fe + 3O₂ → 2Fe₂O₃)에 그대로 옮겨 적용하게 됩니다. 구리에서 완벽히 익혀 두면 철은 그 위에 얹기만 하면 됩니다.
+    </div>
+
+  </div>
+</body>
+</html>
